@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from "../../components/Card";
 import logo from '../../assets/logo_cubos.svg';
 import './styles.css'
@@ -5,15 +6,16 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-export default function Login() {
+export default function Register() {
 
-  const { register, watch, handleSubmit } = useForm();
+  const { register, watch, formState: { errors }, handleSubmit } = useForm();
   const [able, setAble] = useState(true);
   const [passwordShown, setPasswordShown] = useState(false);
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
+  const nameWatch = watch('name');
 
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
@@ -24,6 +26,7 @@ export default function Login() {
 
       email: emailWatch,
       password: passwordWatch,
+      name: nameWatch
 
     }
     let valid = true;
@@ -35,7 +38,7 @@ export default function Login() {
     })
     setAble(valid);
 
-  }, [emailWatch, passwordWatch]);
+  }, [emailWatch, passwordWatch, nameWatch]);
 
   async function formSubmit(data) {
 
@@ -44,11 +47,17 @@ export default function Login() {
   }
 
   return (
-    <main className="l-login">
+    <main className="l-register">
       <Card>
         <img className="c-card__img" src={logo} alt="logo da cubos" />
 
         <form action="" className="c-card__form" onSubmit={handleSubmit(formSubmit)}>
+          <Input
+            title='Nome'
+            id='name'
+            type='text'
+            {...register('name', { required: true })}
+          />
           <Input
             title='Email'
             id='email'
@@ -62,14 +71,15 @@ export default function Login() {
             type={passwordShown ? "text" : "password"}
             togglePasswordVisiblity={togglePasswordVisiblity}
             passwordShown={passwordShown}
-            {...register('password', { required: true })}
+            {...register('password', { required: true, minLength: 8 })}
           />
-          <Button disabled={!able} type='submit' className={able ? 'c-button--able' : 'c-button--disabled'}>Entrar</Button>
+          {errors.password?.type === 'minLength' && <span className="l-register__span" > A senha deve ter 8 digitos no mínimo </span>}
+          <Button disabled={!able} type='submit' className={able ? 'c-button--able' : 'c-button--disabled'}>Criar conta</Button>
         </form>
       </Card>
-      <footer className="l-login__footer">
-        <p className="l-login__p" >Não tem uma conta? </p><Link className="l-login__link" to="/register">Cadastre-se!</Link>
+      <footer className="l-register__footer">
+        <p className="l-register__p" >Já possui uma conta </p><Link className="l-register__link" to="/login">Acesse agora!</Link>
       </footer>
-    </main>
+    </main >
   )
 }

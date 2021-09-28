@@ -6,7 +6,7 @@
   align-items: center;
   min-width: 42.7rem;
   box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
+  border-radius: 1.6rem;
 
 }
 
@@ -38,7 +38,6 @@
 .c-card__label{
 
   font-weight: 600;
-  color: #374952;
   font-size: 1.6rem;
 
 }
