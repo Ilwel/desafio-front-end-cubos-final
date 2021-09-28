@@ -1,0 +1,29 @@
+.c-button{
+
+  all: unset;
+  margin-top: 5rem;
+  background-color: #DA0175;
+  color: white;
+  height: 4rem;
+  width: 16.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+
+}
+
+.c-button--able{
+
+  opacity: 1;
+  cursor: pointer;
+  
+}
+
+.c-button--disabled{
+
+  opacity: 0.3;
+
+}
