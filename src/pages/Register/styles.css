@@ -1,10 +1,4 @@
-@keyframes apear {
-  0%{
-    opacity: 0;
-  }100%{
-    opacity: 1;
-  }
-}
+@import url('../../styles/global.css');
 
 .l-register{
  
@@ -52,17 +46,13 @@
   color: #DA0175;
   animation: apear 2s;
   font-size: 1.2rem;
+  position: absolute;
+  bottom: 21rem;
+
 }
 
 .l-register .c-card{
   
   height: 65rem;
-
-}
-
-.l-register .c-button{
-
-  position: absolute;
-  bottom: 13rem;
 
 }
