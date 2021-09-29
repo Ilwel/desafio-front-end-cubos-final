@@ -7,12 +7,17 @@ import Input from "../../components/Input";
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import makeUrl from '../../utils/makeUrl';
+import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
 
 export default function Register() {
 
   const { register, watch, formState: { errors }, handleSubmit } = useForm();
   const [able, setAble] = useState(true);
+  const [apiError, setApiError] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
+  const history = useHistory();
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
   const nameWatch = watch('name');
@@ -40,9 +45,31 @@ export default function Register() {
 
   }, [emailWatch, passwordWatch, nameWatch]);
 
+  useEffect(() => {
+    if (apiError) {
+      toast.error(apiError);
+    }
+  }, [apiError])
+
   async function formSubmit(data) {
 
+    setApiError('');
     console.log(data);
+    const res = await fetch(makeUrl('register'), {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-type': 'application/json',
+      }
+
+    })
+
+    const resData = await res.json();
+    console.log(resData);
+    if (res.ok) {
+      history.push('/login')
+    }
+    setApiError(resData);
 
   }
 
@@ -73,12 +100,12 @@ export default function Register() {
             passwordShown={passwordShown}
             {...register('password', { required: true, minLength: 8 })}
           />
-          {errors.password?.type === 'minLength' && <span className="l-register__span" > A senha deve ter 8 digitos no mínimo </span>}
+          {errors.password?.type === 'minLength' && <span className="l-register__span" >A senha deve conter 8 dígitos</span>}
           <Button disabled={!able} type='submit' className={able ? 'c-button--able' : 'c-button--disabled'}>Criar conta</Button>
         </form>
       </Card>
       <footer className="l-register__footer">
-        <p className="l-register__p" >Já possui uma conta </p><Link className="l-register__link" to="/login">Acesse agora!</Link>
+        <p className="l-register__p" >Já possui uma conta? </p><Link className="l-register__link" to="/login">Acesse agora!</Link>
       </footer>
     </main >
   )

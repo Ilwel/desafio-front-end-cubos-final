@@ -6,12 +6,17 @@ import Input from "../../components/Input";
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import makeUrl from "../../utils/makeUrl";
+import { useHistory } from "react-router";
+import { toast } from 'react-toastify';
 
 export default function Login() {
 
   const { register, watch, handleSubmit } = useForm();
   const [able, setAble] = useState(true);
+  const [apiError, setApiError] = useState();
   const [passwordShown, setPasswordShown] = useState(false);
+  const history = useHistory();
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
 
@@ -37,9 +42,31 @@ export default function Login() {
 
   }, [emailWatch, passwordWatch]);
 
+  useEffect(() => {
+    if (apiError) {
+      toast.error(apiError);
+    }
+  }, [apiError])
+
   async function formSubmit(data) {
 
+    setApiError('');
     console.log(data);
+    const res = await fetch(makeUrl('login'), {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-type': 'application/json',
+      }
+
+    })
+
+    const resData = await res.json();
+    console.log(resData);
+    if (res.ok) {
+      history.push('/home')
+    }
+    setApiError(resData);
 
   }
 
