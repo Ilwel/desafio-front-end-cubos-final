@@ -1,0 +1,55 @@
+.c-side-bar{
+ 
+  background-color: var(--color-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 20%;
+
+}
+
+.c-side-bar .c-button{
+
+  margin-top: 33.9rem;
+
+}
+
+.c-side-bar__logo{
+
+  margin-top: 3.2rem;
+
+}
+
+.c-side-bar__menu{
+
+  margin-top: 6.7rem;
+  width: 100%;
+
+}
+
+.c-side-bar__menu-item{
+
+  all:unset;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  height: 4.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding-left: 4.8rem;
+  color: var(--color-2);
+
+}
+
+.c-side-bar__menu-item:hover{
+
+  background-color: var(--main-color);
+
+}
+
+.c-side-bar__menu-item--able{
+
+  background-color: var(--main-color);
+
+}
