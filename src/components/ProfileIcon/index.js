@@ -6,15 +6,12 @@ import { useState } from 'react';
 export default function ProfileIcon() {
   const [open, setOpen] = useState(false);
 
-  function handleClickProfile() {
-    setOpen(!open);
-  }
-
   return (
     <>
-      <img onClick={handleClickProfile} className="c-profile-icon" src={profileLogo} alt="profile-icon" />
+      <img onClick={() => setOpen(!open)} className="c-profile-icon" src={profileLogo} alt="profile-icon" />
       <ModalProfile
         open={open}
+        setOpen={setOpen}
       />
     </>
   )

@@ -16,15 +16,10 @@ export default function Register() {
   const { register, watch, formState: { errors }, handleSubmit } = useForm();
   const [able, setAble] = useState(true);
   const [apiError, setApiError] = useState('');
-  const [passwordShown, setPasswordShown] = useState(false);
   const history = useHistory();
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
   const nameWatch = watch('name');
-
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
 
   useEffect(() => {
     const watchs = {
@@ -95,9 +90,6 @@ export default function Register() {
           <Input
             title='Senha'
             id='password'
-            type={passwordShown ? "text" : "password"}
-            togglePasswordVisiblity={togglePasswordVisiblity}
-            passwordShown={passwordShown}
             {...register('password', { required: true, minLength: 8 })}
           />
           {errors.password?.type === 'minLength' && <span className="l-register__span" >A senha deve conter 8 dígitos</span>}

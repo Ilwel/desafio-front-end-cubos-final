@@ -15,14 +15,9 @@ export default function Login() {
   const { register, watch, handleSubmit } = useForm();
   const [able, setAble] = useState(true);
   const [apiError, setApiError] = useState();
-  const [passwordShown, setPasswordShown] = useState(false);
   const history = useHistory();
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
-
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
 
   useEffect(() => {
     const watchs = {
@@ -86,9 +81,6 @@ export default function Login() {
           <Input
             title='Senha'
             id='password'
-            type={passwordShown ? "text" : "password"}
-            togglePasswordVisiblity={togglePasswordVisiblity}
-            passwordShown={passwordShown}
             {...register('password', { required: true })}
           />
           <Button disabled={!able} type='submit' className={able ? 'c-button--able' : 'c-button--disabled'}>Entrar</Button>
