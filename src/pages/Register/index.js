@@ -10,12 +10,14 @@ import { Link } from 'react-router-dom';
 import makeUrl from '../../utils/makeUrl';
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
+import ModalLoading from '../../components/ModalLoading';
 
 export default function Register() {
 
   const { register, watch, formState: { errors }, handleSubmit } = useForm();
   const [able, setAble] = useState(true);
   const [apiError, setApiError] = useState('');
+  const [open, setOpen] = useState();
   const history = useHistory();
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
@@ -50,6 +52,7 @@ export default function Register() {
 
     setApiError('');
     console.log(data);
+    setOpen(true);
     const res = await fetch(makeUrl('register'), {
       method: 'POST',
       body: JSON.stringify(data),
@@ -64,12 +67,14 @@ export default function Register() {
     if (res.ok) {
       history.push('/login')
     }
+    setOpen(false);
     setApiError(resData);
 
   }
 
   return (
     <main className="l-register">
+      <ModalLoading open={open} />
       <Card>
         <img className="c-card__img" src={logo} alt="logo da cubos" />
 
