@@ -4,19 +4,20 @@ import './styles.css'
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useForm } from 'react-hook-form'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import makeUrl from "../../utils/makeUrl";
 import { useHistory } from "react-router";
 import { toast } from 'react-toastify';
 import ModalLoading from "../../components/ModalLoading";
+import AuthContext from '../../contexts/AuthContext';
 
 export default function Login() {
-
   const { register, watch, handleSubmit } = useForm();
   const [able, setAble] = useState(true);
   const [apiError, setApiError] = useState();
   const [open, setOpen] = useState();
+  const { setToken } = useContext(AuthContext);
   const history = useHistory();
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
@@ -62,6 +63,8 @@ export default function Login() {
     const resData = await res.json();
     console.log(resData);
     if (res.ok) {
+      const { token } = resData;
+      setToken(token);
       history.push('/home')
     }
     setOpen(false)
