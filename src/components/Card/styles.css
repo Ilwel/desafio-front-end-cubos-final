@@ -78,3 +78,13 @@
   gap: 2.2rem;
 
 }
+
+.c-card__close{
+
+  margin-left: 36rem;
+  margin-top: 2rem;
+  font-size: 2rem;
+  cursor: pointer;
+  position: fixed;
+
+}

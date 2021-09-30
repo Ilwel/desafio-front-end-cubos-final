@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import showIcon from '../../assets/show.svg';
 import dontShowIcon from '../../assets/dont_show.svg';
 
 const Input = React.forwardRef((props, ref) => {
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+
   return (
     <div
       className="c-card__form-control"
@@ -14,15 +20,15 @@ const Input = React.forwardRef((props, ref) => {
             placeholder={props.placeholder}
             className="c-card__input"
             id={props.id}
-            type={props.type}
+            type={passwordShown ? "text" : "password"}
             name={props.name}
             ref={ref}
             onChange={props.onChange}
             onBlur={props.onBlur}
           />
-          <img onClick={props.togglePasswordVisiblity}
+          <img onClick={togglePasswordVisiblity}
             className="c-card__icon"
-            src={props.passwordShown ? showIcon : dontShowIcon} alt="icone do password" />
+            src={passwordShown ? showIcon : dontShowIcon} alt="icone do password" />
         </div>
 
       ) : (
