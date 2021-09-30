@@ -61,3 +61,20 @@
   width: 25.1rem;
 
 }
+
+.c-card__title{
+
+  background-color: var(--main-color);
+  color: var(--color-2);
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 600;
+  border-top-left-radius: 1.6rem;
+  border-top-right-radius: 1.6rem;
+  gap: 2.2rem;
+
+}

@@ -1,0 +1,42 @@
+@import url('..//../styles/global.css');
+
+.c-modal-profile{
+
+  position: fixed;
+  top: 7.7rem;
+  right: 5.6rem;
+  box-shadow: 0 0.4rem 0.8rem 0.2rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.8rem;
+  animation: grow-up 0.5s;
+
+}
+
+.first{
+
+  border-top-left-radius: 0.8rem;
+  border-top-right-radius: 0.8rem;
+
+}
+
+.last{
+
+  border-bottom-left-radius: 0.8rem;
+  border-bottom-right-radius: 0.8rem;
+
+}
+
+.c-modal-profile__item{
+
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 2rem;
+  cursor: pointer;
+
+}
+
+.c-modal-profile__item:hover{
+
+  background-color: #d5d5d5;
+
+}
