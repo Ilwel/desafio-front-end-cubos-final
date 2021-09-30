@@ -9,12 +9,14 @@ import { Link } from "react-router-dom";
 import makeUrl from "../../utils/makeUrl";
 import { useHistory } from "react-router";
 import { toast } from 'react-toastify';
+import ModalLoading from "../../components/ModalLoading";
 
 export default function Login() {
 
   const { register, watch, handleSubmit } = useForm();
   const [able, setAble] = useState(true);
   const [apiError, setApiError] = useState();
+  const [open, setOpen] = useState();
   const history = useHistory();
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
@@ -46,6 +48,7 @@ export default function Login() {
   async function formSubmit(data) {
 
     setApiError('');
+    setOpen(true);
     console.log(data);
     const res = await fetch(makeUrl('login'), {
       method: 'POST',
@@ -61,12 +64,14 @@ export default function Login() {
     if (res.ok) {
       history.push('/home')
     }
+    setOpen(false)
     setApiError(resData);
 
   }
 
   return (
     <main className="l-login">
+      <ModalLoading open={open} />
       <Card>
         <img className="c-card__img" src={logo} alt="logo da cubos" />
 
