@@ -8,7 +8,10 @@
 
   font-size: 62.5%;
   font-family: 'Montserrat', sans-serif;
-  color: #374952;
+  --main-color:  #374952;
+  --color-2: white;
+  --color-3:#263238;
+  color: var(--main-color);
 
 }
 
