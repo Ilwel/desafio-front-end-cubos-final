@@ -11,6 +11,7 @@
   --main-color:  #374952;
   --color-2: white;
   --color-3:#263238;
+  --color-4:#DA0175;
   color: var(--main-color);
 
 }
