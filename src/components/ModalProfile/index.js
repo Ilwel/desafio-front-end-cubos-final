@@ -15,8 +15,8 @@ export default function ModalProfile(props) {
     <>
       {props.open && (
         <>
-          <div onClick={handleClickProfile} className="c-modal-profile">
-            <div className="c-modal-profile__item first">
+          <div className="c-modal-profile">
+            <div onClick={handleClickProfile} className="c-modal-profile__item first">
               <img src={editIcon} alt="" />
               Editar
             </div>
