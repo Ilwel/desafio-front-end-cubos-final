@@ -30,7 +30,7 @@ export default function ModalEditProfile(props) {
 
     }
     let valid = true;
-    if (passwordWatch, phoneWatch, cpfWatch) {
+    if (passwordWatch || phoneWatch || cpfWatch) {
       setAble(valid)
     }
     Object.entries(watchs).map(([field, value]) => {
