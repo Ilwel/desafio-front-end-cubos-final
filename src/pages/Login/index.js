@@ -18,6 +18,7 @@ export default function Login() {
   const [apiError, setApiError] = useState();
   const [open, setOpen] = useState();
   const { setToken } = useContext(AuthContext);
+  const { setUserData } = useContext(AuthContext);
   const history = useHistory();
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
@@ -50,7 +51,6 @@ export default function Login() {
 
     setApiError('');
     setOpen(true);
-    console.log(data);
     const res = await fetch(makeUrl('login'), {
       method: 'POST',
       body: JSON.stringify(data),
@@ -61,10 +61,10 @@ export default function Login() {
     })
 
     const resData = await res.json();
-    console.log(resData);
     if (res.ok) {
-      const { token } = resData;
+      const { token, user } = resData;
       setToken(token);
+      setUserData(user);
       history.push('/home')
     }
     setOpen(false)
