@@ -27,3 +27,11 @@
   opacity: 0.3;
 
 }
+
+.outline{
+
+  background-color: var(--color-2);
+  border: solid 0.1rem var(--color-4);
+  color: var(--color-4);
+
+}
