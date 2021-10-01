@@ -15,7 +15,6 @@ export default function SideBar() {
     const items = document.getElementsByClassName('c-side-bar__menu-item');
     for (const item of items) {
       const path = location.pathname.replace('/', '')
-      console.log(path);
       if (item.id === path) {
         item.classList.add('c-side-bar__menu-item--able');
       }

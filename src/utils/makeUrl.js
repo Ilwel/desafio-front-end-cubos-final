@@ -1,7 +1,4 @@
-const makeUrl = (path) => {
+const makeUrl = (path) => `${process.env.REACT_APP_API_URL}${path}`;
 
-  console.log(process.env);
-  return `${process.env.REACT_APP_API_URL}${path}`;
-}
 
 export default makeUrl;

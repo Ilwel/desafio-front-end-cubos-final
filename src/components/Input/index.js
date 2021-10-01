@@ -21,6 +21,7 @@ const Input = React.forwardRef((props, ref) => {
             className="c-card__input"
             id={props.id}
             type={passwordShown ? "text" : "password"}
+            defaultValue={props.defaultValue}
             name={props.name}
             ref={ref}
             onChange={props.onChange}
@@ -38,6 +39,7 @@ const Input = React.forwardRef((props, ref) => {
             className="c-card__input"
             id={props.id}
             type={props.type}
+            defaultValue={props.defaultValue}
             name={props.name}
             ref={ref}
             onChange={props.onChange}
