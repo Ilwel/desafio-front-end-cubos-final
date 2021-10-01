@@ -14,9 +14,10 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 export default function Routes() {
 
   const [token, setToken] = useState('');
+  const [userData, setUserData] = useState({});
 
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider value={{ token, setToken, userData, setUserData }}>
       <Router>
         <Route
           path="/register"
@@ -29,6 +30,11 @@ export default function Routes() {
           component={Login}
         />
         <ProtectedRoutes>
+          <Route
+            path="/"
+            exact
+            component={Home}
+          />
           <Route
             path="/home"
             exact
