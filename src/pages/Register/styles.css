@@ -54,5 +54,6 @@
 .l-register .c-card{
   
   height: 65rem;
+  background-color: var(--color-2);
 
 }

@@ -41,5 +41,6 @@
 .l-login .c-card{
   
   height: 55rem;
+  background-color: var(--color-2);
 
 }

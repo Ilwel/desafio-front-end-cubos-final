@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import { useState } from "react";
 import AuthContext from "./contexts/AuthContext";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import Clients from "./pages/Clients";
 
 export default function Routes() {
 
@@ -48,7 +49,7 @@ export default function Routes() {
           <Route
             path="/clients"
             exact
-            component={Home}
+            component={Clients}
           />
         </ProtectedRoutes>
       </Router>
