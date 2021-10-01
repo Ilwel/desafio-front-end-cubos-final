@@ -15,7 +15,7 @@ export default function ModalEditProfile(props) {
   const [apiError, setApiError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [open, setOpen] = useState();
-  const { userData, token } = useContext(AuthContext);
+  const { userData, token, setUserData } = useContext(AuthContext);
   const nameWatch = watch('name');
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
@@ -68,6 +68,16 @@ export default function ModalEditProfile(props) {
       }
 
     })
+    const res2 = await fetch(makeUrl('profile'), {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer' + token
+      }
+
+    })
+    const userDataApi = await res2.json();
+    setUserData(userDataApi);
     const resData = await res.json();
     if (res.ok) {
       props.setOpen(false);
