@@ -15,6 +15,7 @@
   --color-4:#DA0175;
   color: var(--main-color);
   background-color: var(--bg-color);
+  caret-color: var(--color-4);
 
 }
 
