@@ -65,6 +65,7 @@ export default function Register() {
     const resData = await res.json();
     console.log(resData);
     if (res.ok) {
+      toast.success(resData);
       history.push('/login')
     }
     setOpen(false);
