@@ -1,9 +1,9 @@
-import AuthContext from "../../contexts/AuthContext";
-import { useContext } from "react";
+// import AuthContext from "../../contexts/AuthContext";
+// import { useContext } from "react";
 import { Redirect } from "react-router";
 
 export default function ProtectedRoutes(props) {
-  const { token } = useContext(AuthContext);
+  const token = localStorage.getItem('token');
 
   return (
     <>

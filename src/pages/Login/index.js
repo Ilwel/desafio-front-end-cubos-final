@@ -64,6 +64,7 @@ export default function Login() {
     if (res.ok) {
       const { token, user } = resData;
       setToken(token);
+      localStorage.setItem('token', token);
       setUserData(user);
       history.push('/home')
     }
