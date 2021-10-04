@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { getDataByCep } from '../../utils/viaCep';
 import ModalLoading from '../../components/ModalLoading';
 import makeUrl from '../../utils/makeUrl';
-import AuthContext from '../../contexts/AuthContext';
+//import AuthContext from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 
 export default function Clients() {
