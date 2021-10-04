@@ -4,7 +4,7 @@ import ProfileIcon from '../../components/ProfileIcon';
 import Input from '../../components/Input';
 import { useForm } from 'react-hook-form';
 import Button from '../../components/Button';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getDataByCep } from '../../utils/viaCep';
 import ModalLoading from '../../components/ModalLoading';
 import makeUrl from '../../utils/makeUrl';
@@ -17,7 +17,6 @@ export default function Clients() {
   const [apiError, setApiError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [open, setOpen] = useState(false);
-  const { token } = useContext(AuthContext);
   const emailWatch = watch('email');
   const nameWatch = watch('name');
   const cpfWatch = watch('cpf');
@@ -84,6 +83,8 @@ export default function Clients() {
 
 
   async function formSubmit(data) {
+    
+    const token = localStorage.getItem('token');
 
     setApiError('');
     console.log(data);
