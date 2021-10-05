@@ -20,6 +20,7 @@ export default function ModalProfile(props) {
   }
 
   function handleClickProfile() {
+    props.setOpen(false);
     setOpen(!open);
   }
 
@@ -37,12 +38,12 @@ export default function ModalProfile(props) {
               Sair
             </div>
           </div>
-          <ModalEditProfile
-            open={open}
-            setOpen={setOpen}
-          />
         </>
       )}
+      <ModalEditProfile
+        open={open}
+        setOpen={setOpen}
+      />
     </>
   )
 
