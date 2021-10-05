@@ -119,7 +119,7 @@ export default function Clients() {
   function handleCancellButton(e) {
 
     e.preventDefault();
-    history.go('/home');
+    history.push('/home');
 
   }
 
