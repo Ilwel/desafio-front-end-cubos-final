@@ -24,23 +24,27 @@ export default function ModalEditProfile(props) {
 
   function refreshUserForm() {
 
-    setValue('name', userData.name);
-    setValue('email', userData.email);
-    setValue('password', userData.password);
-    setValue('phone', userData.phone);
-    setValue('cpf', userData.cpf);
+    const user = JSON.parse(localStorage.getItem('userData'));
+
+    setValue('name', user.name);
+    setValue('email', user.email);
+    setValue('password', user.password);
+    setValue('phone', user.phone);
+    setValue('cpf', user.cpf);
 
   }
 
   useEffect(() => {
 
-    setValue('name', userData.name);
-    setValue('email', userData.email);
-    setValue('password', userData.password);
-    setValue('phone', userData.phone);
-    setValue('cpf', userData.cpf);
+    const user = JSON.parse(localStorage.getItem('userData'));
 
-  }, [setValue, userData])
+    setValue('name', user.name);
+    setValue('email', user.email);
+    setValue('password', user.password);
+    setValue('phone', user.phone);
+    setValue('cpf', user.cpf);
+
+  }, [setValue])
 
   useEffect(() => {
     const watchs = {
@@ -105,6 +109,7 @@ export default function ModalEditProfile(props) {
       reset();
       setOpen(false);
       setUserData(userDataApi)
+      localStorage.setItem('userData', JSON.stringify(userDataApi));
       return;
     }
     setOpen(false);
@@ -136,14 +141,12 @@ export default function ModalEditProfile(props) {
                 title='Nome'
                 id='name'
                 type='text'
-                defaultValue={userData['name'] ? userData['name'] : ''}
                 {...register('name', { required: true })}
               />
               <Input
                 title='Email'
                 id='email'
                 type='email'
-                defaultValue={userData['email'] ? userData['email'] : ''}
                 {...register('email', { required: true })}
               />
               <Input
@@ -156,7 +159,6 @@ export default function ModalEditProfile(props) {
                 title='Telefone'
                 id='phone'
                 type='text'
-                defaultValue={userData['phone'] ? userData['phone'] : ''}
                 placeholder="(71) 9 9333-2222"
                 {...register('phone')}
               />
@@ -164,7 +166,6 @@ export default function ModalEditProfile(props) {
                 title='CPF'
                 id='cpf'
                 type='text'
-                defaultValue={userData['cpf'] ? userData['cpf'] : ''}
                 placeholder="222.222.222-22"
                 {...register('cpf')}
               />
