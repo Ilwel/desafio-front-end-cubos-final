@@ -3,8 +3,7 @@ import Card from '../Card';
 import Input from '../Input';
 import { useForm } from 'react-hook-form';
 import Button from '../Button';
-import { useContext, useEffect, useState } from 'react';
-import AuthContext from '../../contexts/AuthContext';
+import { useEffect, useState } from 'react';
 import makeUrl from '../../utils/makeUrl';
 import { toast } from 'react-toastify';
 import ModalLoading from '../ModalLoading';
@@ -15,7 +14,6 @@ export default function ModalEditProfile(props) {
   const [apiError, setApiError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [open, setOpen] = useState();
-  const { userData, token, setUserData } = useContext(AuthContext);
   const nameWatch = watch('name');
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
@@ -83,6 +81,7 @@ export default function ModalEditProfile(props) {
     setApiError('');
     setSuccessMsg('');
     setOpen(true);
+    const token = localStorage.getItem('token');
     const res = await fetch(makeUrl('profile'), {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -101,15 +100,14 @@ export default function ModalEditProfile(props) {
 
     })
     const userDataApi = await res2.json();
-    setUserData(userDataApi);
     const resData = await res.json();
     if (res.ok) {
       props.setOpen(false);
       setSuccessMsg(resData);
       reset();
       setOpen(false);
-      setUserData(userDataApi)
       localStorage.setItem('userData', JSON.stringify(userDataApi));
+      refreshUserForm();
       return;
     }
     setOpen(false);
@@ -120,7 +118,6 @@ export default function ModalEditProfile(props) {
 
   function handleCloseButton() {
 
-    setUserData(userData);
     refreshUserForm();
     props.setOpen(false);
 
