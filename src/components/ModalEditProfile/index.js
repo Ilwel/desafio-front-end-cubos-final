@@ -3,24 +3,46 @@ import Card from '../Card';
 import Input from '../Input';
 import { useForm } from 'react-hook-form';
 import Button from '../Button';
-import { useContext, useEffect, useState } from 'react';
-import AuthContext from '../../contexts/AuthContext';
+import { useEffect, useState } from 'react';
 import makeUrl from '../../utils/makeUrl';
 import { toast } from 'react-toastify';
 import ModalLoading from '../ModalLoading';
 
 export default function ModalEditProfile(props) {
-  const { register, watch, handleSubmit, reset } = useForm();
+  const { register, watch, handleSubmit, reset, setValue } = useForm();
   const [able, setAble] = useState(true);
   const [apiError, setApiError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [open, setOpen] = useState();
-  const { userData, token, setUserData } = useContext(AuthContext);
   const nameWatch = watch('name');
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
   const phoneWatch = watch('phone');
   const cpfWatch = watch('cpf');
+
+  function refreshUserForm() {
+
+    const user = JSON.parse(localStorage.getItem('userData'));
+
+    setValue('name', user.name);
+    setValue('email', user.email);
+    setValue('password', user.password);
+    setValue('phone', user.phone);
+    setValue('cpf', user.cpf);
+
+  }
+
+  useEffect(() => {
+
+    const user = JSON.parse(localStorage.getItem('userData'));
+
+    setValue('name', user.name);
+    setValue('email', user.email);
+    setValue('password', user.password);
+    setValue('phone', user.phone);
+    setValue('cpf', user.cpf);
+
+  }, [setValue])
 
   useEffect(() => {
     const watchs = {
@@ -59,6 +81,7 @@ export default function ModalEditProfile(props) {
     setApiError('');
     setSuccessMsg('');
     setOpen(true);
+    const token = localStorage.getItem('token');
     const res = await fetch(makeUrl('profile'), {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -77,18 +100,26 @@ export default function ModalEditProfile(props) {
 
     })
     const userDataApi = await res2.json();
-    setUserData(userDataApi);
     const resData = await res.json();
     if (res.ok) {
       props.setOpen(false);
       setSuccessMsg(resData);
       reset();
       setOpen(false);
+      localStorage.setItem('userData', JSON.stringify(userDataApi));
+      refreshUserForm();
       return;
     }
     setOpen(false);
     setApiError(resData);
     console.log(resData);
+
+  }
+
+  function handleCloseButton() {
+
+    refreshUserForm();
+    props.setOpen(false);
 
   }
 
@@ -98,7 +129,7 @@ export default function ModalEditProfile(props) {
         <div className="c-modal-edit-profile">
           <ModalLoading open={open} />
           <Card>
-            <p onClick={() => props.setOpen(false)} className="c-card__close">X</p>
+            <p onClick={() => handleCloseButton()} className="c-card__close">X</p>
             <h1 className="c-card__h1">
               EDITAR USUÁRIO
             </h1>
@@ -107,14 +138,12 @@ export default function ModalEditProfile(props) {
                 title='Nome'
                 id='name'
                 type='text'
-                defaultValue={userData['name'] ? userData['name'] : ''}
                 {...register('name', { required: true })}
               />
               <Input
                 title='Email'
                 id='email'
                 type='email'
-                defaultValue={userData['email'] ? userData['email'] : ''}
                 {...register('email', { required: true })}
               />
               <Input
@@ -127,7 +156,6 @@ export default function ModalEditProfile(props) {
                 title='Telefone'
                 id='phone'
                 type='text'
-                defaultValue={userData['phone'] ? userData['phone'] : ''}
                 placeholder="(71) 9 9333-2222"
                 {...register('phone')}
               />
@@ -135,7 +163,6 @@ export default function ModalEditProfile(props) {
                 title='CPF'
                 id='cpf'
                 type='text'
-                defaultValue={userData['cpf'] ? userData['cpf'] : ''}
                 placeholder="222.222.222-22"
                 {...register('cpf')}
               />

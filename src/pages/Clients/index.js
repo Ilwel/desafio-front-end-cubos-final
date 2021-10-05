@@ -10,6 +10,7 @@ import ModalLoading from '../../components/ModalLoading';
 import makeUrl from '../../utils/makeUrl';
 //import AuthContext from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router';
 
 export default function Clients() {
   const { register, watch, handleSubmit, reset, setValue } = useForm();
@@ -17,6 +18,7 @@ export default function Clients() {
   const [apiError, setApiError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [open, setOpen] = useState(false);
+  const history = useHistory();
   const emailWatch = watch('email');
   const nameWatch = watch('name');
   const cpfWatch = watch('cpf');
@@ -74,16 +76,18 @@ export default function Clients() {
 
     if (apiError) {
       toast.error(apiError);
+      setApiError('');
     }
     if (successMsg) {
       toast.success(successMsg);
+      setSuccessMsg('');
     }
 
   }, [apiError, successMsg])
 
 
   async function formSubmit(data) {
-    
+
     const token = localStorage.getItem('token');
 
     setApiError('');
@@ -112,6 +116,12 @@ export default function Clients() {
 
   }
 
+  function handleCancellButton(e) {
+
+    e.preventDefault();
+    history.push('/home');
+
+  }
 
   return (
     <main className="l-clients">
@@ -186,7 +196,7 @@ export default function Clients() {
               />
             </div>
             <div className="l-container__form-buttons">
-              <Button className='outline c-button--able'>Cancelar</Button>
+              <Button onClick={handleCancellButton} type='text' className='outline c-button--able'>Cancelar</Button>
               <Button disabled={!able} type='submit' className={able ? 'c-button--able' : 'c-button--disabled'}>Adicionar cliente</Button>
             </div>
           </form>

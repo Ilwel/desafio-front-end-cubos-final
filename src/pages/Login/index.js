@@ -49,27 +49,33 @@ export default function Login() {
 
   async function formSubmit(data) {
 
-    setApiError('');
-    setOpen(true);
-    const res = await fetch(makeUrl('login'), {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-type': 'application/json',
+    try {
+      setApiError('');
+      setOpen(true);
+      const res = await fetch(makeUrl('login'), {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-type': 'application/json',
+        }
+
+      })
+
+      const resData = await res.json();
+      if (res.ok) {
+        const { token, user } = resData;
+        setToken(token);
+        localStorage.setItem('token', token);
+        localStorage.setItem('userData', JSON.stringify(user));
+        setUserData(user);
+        history.push('/home')
       }
+      setOpen(false)
+      setApiError(resData);
 
-    })
-
-    const resData = await res.json();
-    if (res.ok) {
-      const { token, user } = resData;
-      setToken(token);
-      localStorage.setItem('token', token);
-      setUserData(user);
-      history.push('/home')
+    } catch (error) {
+      console.log(error.message);
     }
-    setOpen(false)
-    setApiError(resData);
 
   }
 
