@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import ModalLoading from '../ModalLoading';
 
 export default function ModalEditProfile(props) {
-  const { register, watch, handleSubmit, reset } = useForm();
+  const { register, watch, handleSubmit, reset, setValue } = useForm();
   const [able, setAble] = useState(true);
   const [apiError, setApiError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -21,6 +21,26 @@ export default function ModalEditProfile(props) {
   const passwordWatch = watch('password');
   const phoneWatch = watch('phone');
   const cpfWatch = watch('cpf');
+
+  function refreshUserForm() {
+
+    setValue('name', userData.name);
+    setValue('email', userData.email);
+    setValue('password', userData.password);
+    setValue('phone', userData.phone);
+    setValue('cpf', userData.cpf);
+
+  }
+
+  useEffect(() => {
+
+    setValue('name', userData.name);
+    setValue('email', userData.email);
+    setValue('password', userData.password);
+    setValue('phone', userData.phone);
+    setValue('cpf', userData.cpf);
+
+  }, [setValue, userData])
 
   useEffect(() => {
     const watchs = {
@@ -84,11 +104,20 @@ export default function ModalEditProfile(props) {
       setSuccessMsg(resData);
       reset();
       setOpen(false);
+      setUserData(userDataApi)
       return;
     }
     setOpen(false);
     setApiError(resData);
     console.log(resData);
+
+  }
+
+  function handleCloseButton() {
+
+    setUserData(userData);
+    refreshUserForm();
+    props.setOpen(false);
 
   }
 
@@ -98,7 +127,7 @@ export default function ModalEditProfile(props) {
         <div className="c-modal-edit-profile">
           <ModalLoading open={open} />
           <Card>
-            <p onClick={() => props.setOpen(false)} className="c-card__close">X</p>
+            <p onClick={() => handleCloseButton()} className="c-card__close">X</p>
             <h1 className="c-card__h1">
               EDITAR USUÁRIO
             </h1>
