@@ -196,7 +196,7 @@ export default function AddClients() {
               />
             </div>
             <div className="l-container__form-buttons">
-              <Button onClick={handleCancellButton} type='text' className='outline c-button--able'>Cancelar</Button>
+              <Button onClick={handleCancellButton} type='button' className='outline c-button--able'>Cancelar</Button>
               <Button disabled={!able} type='submit' className={able ? 'c-button--able' : 'c-button--disabled'}>Adicionar cliente</Button>
             </div>
           </form>
