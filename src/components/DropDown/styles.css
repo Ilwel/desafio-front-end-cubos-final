@@ -1,0 +1,10 @@
+.c-card__drop-down{
+
+  /* all: unset; */
+  border: 0.1rem solid #374952;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  background-color: var(--color-2);
+  width: 100%;
+
+}

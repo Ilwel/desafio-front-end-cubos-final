@@ -1,0 +1,66 @@
+.add-charges > .c-card{
+
+  margin-left: 5rem;
+  margin-top: 2.4rem;
+  height: 80%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+}
+
+.add-charges .last-inputs .c-card__input-control{
+
+  border: solid 0.1rem #4C4C4C;
+  border-radius: 0.8rem;
+  width: 25.1rem;
+
+}
+
+.add-charges .c-card__input-control{
+
+  border: solid 0.1rem #4C4C4C;
+  border-radius: 0.8rem;
+  width: 100%;
+
+}
+
+.add-charges .l-container__h1{
+
+  margin-top: 8.8rem;
+
+}
+
+/* 
+.add-charges .drop-down{
+
+  margin-top: 4rem;
+
+} */
+
+.add-charges .c-card__form-control{
+
+  width: 100%;
+
+}
+
+.add-charges .c-card__form{
+
+  width: 60%;
+
+}
+
+.c-card__form .last-inputs{
+
+  width: 100%;
+  display: flex;
+  gap: 8rem;
+  align-items: center;
+
+}
+
+.add-charges .c-button{
+
+  margin: 0;
+
+}

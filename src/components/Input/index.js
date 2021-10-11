@@ -36,7 +36,7 @@ const Input = React.forwardRef((props, ref) => {
         <div className="c-card__input-control">
           <input
             placeholder={props.placeholder}
-            className="c-card__input"
+            className={`c-card__input ${props.className}`}
             id={props.id}
             type={props.type}
             defaultValue={props.defaultValue}
@@ -44,6 +44,9 @@ const Input = React.forwardRef((props, ref) => {
             ref={ref}
             onChange={props.onChange}
             onBlur={props.onBlur}
+            step={props.step}
+            min={props.min}
+            inputMode={props.inputMode}
           />
         </div>
       )}

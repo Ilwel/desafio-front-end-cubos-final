@@ -59,6 +59,14 @@
 
   border-bottom: solid 0.1rem #4C4C4C;
   width: 25.1rem;
+  display: flex;
+  align-items: center;
+
+}
+
+.c-card__input-control p{
+
+  margin-left: 1rem;
 
 }
 
@@ -86,5 +94,10 @@
   font-size: 2rem;
   cursor: pointer;
   position: fixed;
+
+}
+
+.c-card__money-input{
+
 
 }

@@ -1,0 +1,29 @@
+.modal{
+
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+.modal .l-container-form{
+
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+}
+
+.modal .c-card{
+
+  height: 80%;
+  width: 55%;
+
+}

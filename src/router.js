@@ -14,6 +14,8 @@ import AuthContext from "./contexts/AuthContext";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import AddClients from "./pages/AddClients";
 import Clients from "./pages/Clients";
+import Charges from "./pages/Charges";
+import AddCharges from "./pages/AddCharges";
 
 
 function RedirectToHome(props) {
@@ -43,9 +45,10 @@ export default function Routes() {
         <ProtectedRoutes>
           <Route path="/" exact component={Home} />
           <Route path="/home" exact component={Home} />
-          <Route path="/invoice-collection" exact component={Home} />
-          <Route path="/clients/add" exact component={AddClients} />
+          <Route path="/charges" exact component={Charges} />
+          <Route path="/charges/add" exact component={AddCharges} />
           <Route path="/clients" exact component={Clients} />
+          <Route path="/clients/add" exact component={AddClients} />
         </ProtectedRoutes>
       </Router>
     </AuthContext.Provider>

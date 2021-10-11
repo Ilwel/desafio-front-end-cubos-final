@@ -4,13 +4,58 @@ import ProfileIcon from "../../components/ProfileIcon";
 import SideBar from "../../components/SideBar";
 import "./styles.css"
 import ScrollBar from "../../components/ScrollBar";
-import ClientCard from "../../components/ClientCard";
 import mailIcon from '../../assets/mail.svg';
 import phoneIcon from '../../assets/phone.svg';
 import editIcon from '../../assets/edit.svg';
+import Card from "../../components/Card";
+import { useEffect } from "react";
+import makeUrl from "../../utils/makeUrl";
+import { useState } from "react";
+import { formatReal } from '../../utils/format';
+import ModalLoading from "../../components/ModalLoading";
+import ModalClientDetails from "../../components/ModalClientDetails";
+import ModalEditClient from "../../components/ModalEditClient";
 
 export default function Clients() {
   const history = useHistory();
+  const [clients, setClients] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [openClient, setOpenClient] = useState(false);
+  const [openEditClient, setOpenEditClient] = useState(false);
+  const [clientId, setClientId] = useState();
+  const statusStyle = {
+    'em dia': 'up-to-date',
+    'pendente': 'pending',
+    'inadimplente': 'defaulting'
+  }
+
+  useEffect(() => {
+
+    async function load() {
+
+      const token = localStorage.getItem('token');
+      setOpen(true);
+      const res = await fetch(makeUrl('client'), {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        }
+      })
+
+      const resData = await res.json();
+      console.log(resData);
+      if (res.ok) {
+        localStorage.setItem('clients', JSON.stringify(resData));
+        setClients(resData);
+        setOpen(false);
+        return;
+      }
+
+    }
+    load();
+
+  }, [])
 
   function handleAddClients() {
 
@@ -18,10 +63,30 @@ export default function Clients() {
 
   }
 
+  function handleClickClient(e) {
+
+    const isItem = e.target.classList.contains('client__h1');
+    if (!isItem) return;
+    console.log(e.target.id);
+    setClientId(e.target.id);
+    setOpenClient(true);
+
+  }
+
+  function handleClickEditClient(e) {
+
+    setOpenEditClient(true);
+    setClientId(e.target.alt);
+
+  }
+
   return (
     <div className="l-clients">
       <SideBar />
       <ProfileIcon />
+      <ModalLoading open={open} />
+      <ModalClientDetails open={openClient} id={clientId} setOpen={setOpenClient} />
+      <ModalEditClient open={openEditClient} id={clientId} setOpen={setOpenEditClient} />
       <div className="l-container">
         <Button onClick={handleAddClients} className="outline c-button--able">Adicionar Cliente</Button>
         <div className="c-table">
@@ -33,39 +98,39 @@ export default function Clients() {
           </div>
           <ScrollBar>
             <ul>
-              {[0, 1, 2, 3, 4].map((item, i) => (<li className="item" key={`item_${i}`}>
-                <ClientCard >
+              {clients.map((item) => (<li className="item" key={`item_${item.id}`}>
+                <Card>
                   <span className="client section">
-                    <h1 className="client__h1">
-                      Nome e Sobrenome da Cliente
+                    <h1 onClick={(e) => handleClickClient(e)} id={item.id} className="client__h1">
+                      {item.name}
                     </h1>
                     <div className="infos">
                       <div className="info">
                         <img src={mailIcon} alt="" />
-                        email@email.com
+                        {item.email}
                       </div>
                       <div className="info">
                         <img src={phoneIcon} alt="" />
-                        (DDD) 00000-0000
+                        {item.phone}
                       </div>
                     </div>
 
                   </span>
                   <span className="charges-made section">
-                    R$ 00.000,00
+                    R$ {formatReal(item.made_charges)}
                   </span>
                   <span className="charges-received section" >
-                    R$ 00.000,00
+                    R$ {formatReal(item.received_charges)}
                   </span>
-                  <span className={`status section ${item % 2 === 0 ? 'up-to-date' : 'defaulting'}`}>
+                  <span className={`status section ${statusStyle[item.status]}`}>
                     <p >
 
-                      {item % 2 === 0 ? "EM DIA" : "INADIMPLENTE"}
+                      {item.status.toUpperCase()}
 
                     </p>
-                    <img className="edit" src={editIcon} alt="" />
+                    <img onClick={handleClickEditClient} className="edit" src={editIcon} alt={item.id} />
                   </span>
-                </ClientCard>
+                </Card>
               </li>))}
             </ul>
           </ScrollBar>
