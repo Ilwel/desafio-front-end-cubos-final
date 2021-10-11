@@ -53,3 +53,9 @@
   background-color: var(--main-color);
 
 }
+
+.c-link{
+
+  all: unset;
+
+}

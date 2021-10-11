@@ -31,7 +31,7 @@ export default function SideBar() {
           <img src={homeLogo} alt="logo home" />
           <p>HOME</p>
         </Link>
-        <Link id="invoice-collection" to="/invoice-collection" className="c-side-bar__menu-item">
+        <Link id="invoice-collection" to="/charges" className="c-side-bar__menu-item">
           <img src={moneyLogo} alt="logo money" />
           <p>COBRANÇAS</p>
         </Link>
@@ -40,8 +40,9 @@ export default function SideBar() {
           <p>CLIENTES</p>
         </Link>
       </div>
-
-      <Button className="c-button--able">Criar cobrança</Button>
+      <Link className="c-link" to="/charges/add">
+        <Button type="button" className="c-button--able">Criar cobrança</Button>
+      </Link>
 
     </aside>
   )

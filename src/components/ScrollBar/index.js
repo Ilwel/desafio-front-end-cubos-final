@@ -6,9 +6,9 @@ export default function ScrollBar(props) {
 
     <div className="c-scrollbar-container">
       <div className="c-scrollbar">
-        <ul>
-          {props.children}
-        </ul>
+
+        {props.children}
+
       </div>
     </div>
 
