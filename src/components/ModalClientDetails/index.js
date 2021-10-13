@@ -37,7 +37,7 @@ export default function ModalClientDetails(props) {
           setCharges(resData.Charges);
 
         }
-        console.log(resData);
+        // console.log(resData);
 
       }
       load();
@@ -106,32 +106,36 @@ export default function ModalClientDetails(props) {
             </div>
             <div className="c-card__charges">
               <ScrollBar>
-                {charges.map(item => (
-                  <Card>
-                    <div>
-                      <div>
-                        <p className="charge_id">
-                          #{item.charge_id}
-                        </p>
-                        <p>
-                          {item.description}
-                        </p>
-                      </div>
-                      <p className="charge_value">
-                        R$ {formatReal(item.value)}
-                      </p>
-                    </div>
-                    <div className="last">
-                      <p className="charge_due-date">
-                        {formatDate(item.due_date)}
-                      </p>
-                      <p className={`charge_status ${statusStyle[item.status]}`}>
-                        {item.status.toUpperCase()}
-                      </p>
-                    </div>
-                  </Card>
-                ))
-                }
+                <ul>
+                  {charges.map(item => (
+                    <li key={item.charge_id}>
+                      <Card>
+                        <div>
+                          <div>
+                            <p className="charge_id">
+                              #{item.charge_id}
+                            </p>
+                            <p>
+                              {item.description}
+                            </p>
+                          </div>
+                          <p className="charge_value">
+                            R$ {formatReal(item.value)}
+                          </p>
+                        </div>
+                        <div className="last">
+                          <p className="charge_due-date">
+                            {formatDate(item.due_date)}
+                          </p>
+                          <p className={`charge_status ${statusStyle[item.status]}`}>
+                            {item.status.toUpperCase()}
+                          </p>
+                        </div>
+                      </Card>
+                    </li>
+                  ))
+                  }
+                </ul>
               </ScrollBar>
             </div>
           </Card>
