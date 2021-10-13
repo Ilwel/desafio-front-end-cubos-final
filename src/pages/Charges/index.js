@@ -74,7 +74,7 @@ export default function Charges(props) {
                     <span className={`charge-status section up-to-date ${statusStyle[item.status]}`}>
                       {item.status.toUpperCase()}
                     </span>
-                    <span className="charge-due-date section">{formatDate(item.due_date.substring(0, 10))}</span>
+                    <span className="charge-due-date section">{formatDate(item.due_date)}</span>
 
                   </Card>
                 </li>
