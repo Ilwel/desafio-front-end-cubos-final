@@ -36,40 +36,40 @@ export default function ModalEditClient(props) {
   }
 
   useEffect(() => {
-
     async function load() {
+      if (props.id) {
 
-      const token = localStorage.getItem('token');
-      const res = await fetch(makeUrl(`client/${props.id}`), {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + token
+        const token = localStorage.getItem('token');
+        const res = await fetch(makeUrl(`client/${props.id}`), {
+          method: 'GET',
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        })
+
+        const resData = await res.json();
+        if (res.ok) {
+          localStorage.setItem('clientData', JSON.stringify(resData.Client));
         }
-      })
+        console.log(resData);
 
-      const resData = await res.json();
-      if (res.ok) {
-        localStorage.setItem('clientData', JSON.stringify(resData.Client));
+        if (localStorage.getItem('clientData')) {
+
+          const user = JSON.parse(localStorage.getItem('clientData'));
+
+          setValue('name', user.name);
+          setValue('email', user.email);
+          setValue('phone', user.phone);
+          setValue('cpf', user.cpf);
+          setValue('zip_code', user.zip_code);
+          setValue('adress', user.adress);
+          setValue('district', user.district);
+          setValue('city', user.city);
+          setValue('complement', user.complement);
+          setValue('reference_point', user.reference_point);
+
+        }
       }
-      console.log(resData);
-
-      if (localStorage.getItem('clientData')) {
-
-        const user = JSON.parse(localStorage.getItem('clientData'));
-
-        setValue('name', user.name);
-        setValue('email', user.email);
-        setValue('phone', user.phone);
-        setValue('cpf', user.cpf);
-        setValue('zip_code', user.zip_code);
-        setValue('adress', user.adress);
-        setValue('district', user.district);
-        setValue('city', user.city);
-        setValue('complement', user.complement);
-        setValue('reference_point', user.reference_point);
-
-      }
-
     }
     load();
 

@@ -38,13 +38,12 @@ export default function Clients() {
       const res = await fetch(makeUrl('client'), {
         method: 'GET',
         headers: {
-          'Content-type': 'application/json',
           'Authorization': 'Bearer ' + token
         }
       })
 
       const resData = await res.json();
-      console.log(resData);
+      console.log(res);
       if (res.ok) {
         localStorage.setItem('clients', JSON.stringify(resData));
         setClients(resData);
