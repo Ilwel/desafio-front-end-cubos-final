@@ -107,6 +107,7 @@ export default function AddClients() {
     if (res.ok) {
       setSuccessMsg(resData);
       reset();
+      history.push('/clients');
       setOpen(false);
       return;
     }

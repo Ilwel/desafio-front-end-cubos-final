@@ -124,6 +124,7 @@ export default function AddCharges(props) {
     const resData = await res.json();
     setOpen(false);
     if (res.ok) {
+      history.push('/charges');
       setSuccessMsg(resData);
       return;
     }
