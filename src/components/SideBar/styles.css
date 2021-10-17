@@ -57,5 +57,6 @@
 .c-link{
 
   all: unset;
+  height: 0;
 
 }
