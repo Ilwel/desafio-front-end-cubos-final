@@ -27,3 +27,11 @@
   width: 55%;
 
 }
+
+.edit-client .c-card__close{
+
+  position: absolute;
+  top: 8rem;
+  right: 36rem;
+
+}

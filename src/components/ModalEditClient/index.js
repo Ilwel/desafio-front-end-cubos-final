@@ -154,11 +154,20 @@ export default function ModalEditClient(props) {
 
   }
 
+  function handleCloseButton() {
+
+    props.setOpen(false);
+    localStorage.setItem('clientData', '');
+    reset();
+
+  }
+
   return (
     <>
       {props.open && (
-        <main className="modal">
+        <main className="modal edit-client">
           <ModalLoading open={open} />
+          <p onClick={() => handleCloseButton()} className="c-card__close">X</p>
           <div className="l-container-form">
             <div className="c-card">
               <form className="c-card__form" onSubmit={handleSubmit(formSubmit)}>
