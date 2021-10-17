@@ -9,6 +9,7 @@
   border-radius: 0.8rem;
   animation: grow-up 0.5s;
   background-color: var(--color-2);
+  z-index: 1;
 
 }
 
