@@ -64,3 +64,9 @@
   margin: 0;
 
 }
+
+.add-charges .outline{
+
+  background-color: var(--color-2);
+
+}

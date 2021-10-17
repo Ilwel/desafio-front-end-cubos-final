@@ -7,6 +7,7 @@ import ScrollBar from "../../components/ScrollBar";
 import mailIcon from '../../assets/mail.svg';
 import phoneIcon from '../../assets/phone.svg';
 import editIcon from '../../assets/edit.svg';
+import orderByIcon from '../../assets/order_by.svg';
 import Card from "../../components/Card";
 import { useEffect } from "react";
 import makeUrl from "../../utils/makeUrl";
@@ -15,6 +16,8 @@ import { formatReal } from '../../utils/format';
 import ModalLoading from "../../components/ModalLoading";
 import ModalClientDetails from "../../components/ModalClientDetails";
 import ModalEditClient from "../../components/ModalEditClient";
+import SearchBar from "../../components/SearchBar";
+import { toast } from 'react-toastify';
 
 export default function Clients() {
   const history = useHistory();
@@ -23,6 +26,7 @@ export default function Clients() {
   const [openClient, setOpenClient] = useState(false);
   const [openEditClient, setOpenEditClient] = useState(false);
   const [clientId, setClientId] = useState();
+  const [apiError, setApiError] = useState('');
   const statusStyle = {
     'em dia': 'up-to-date',
     'pendente': 'pending',
@@ -79,10 +83,66 @@ export default function Clients() {
 
   }
 
+  useEffect(() => {
+
+    if (apiError) {
+      toast.error(apiError);
+      setApiError('');
+    }
+
+  }, [apiError])
+
+  async function handleSearchClick(search) {
+
+    const token = localStorage.getItem('token');
+    console.log(search);
+    const res = await fetch(makeUrl('client') + `?query=${search}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
+
+    const resData = await res.json();
+    console.log(resData);
+    if (res.ok) {
+
+      setClients(resData);
+      return;
+
+    }
+    setClients([]);
+    setApiError(resData);
+
+  }
+
+  async function handleOrderByClick() {
+
+    const token = localStorage.getItem('token');
+    const res = await fetch(makeUrl('client') + `?name=.`, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
+
+    const resData = await res.json();
+    console.log(resData);
+    if (res.ok) {
+
+      setClients(resData);
+      return;
+
+    }
+    setApiError(resData);
+
+  }
+
   return (
     <div className="l-clients">
       <SideBar />
       <ProfileIcon />
+      <SearchBar handle={handleSearchClick} />
       <ModalLoading open={open} />
       <ModalClientDetails open={openClient} id={clientId} setOpen={setOpenClient} />
       <ModalEditClient open={openEditClient} id={clientId} setOpen={setOpenEditClient} />
@@ -90,7 +150,10 @@ export default function Clients() {
         <Button onClick={handleAddClients} className="outline c-button--able">Adicionar Cliente</Button>
         <div className="c-table">
           <div className="l-container__table-title">
-            <span className="client">Cliente</span>
+            <span className="client">
+              Cliente
+              <img onClick={handleOrderByClick} src={orderByIcon} alt="" />
+            </span>
             <span className="charges-made">Cobranças Feitas</span>
             <span className="charges-received" >Cobranças Recebidas</span>
             <span className="status">Status</span>

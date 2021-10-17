@@ -23,6 +23,14 @@
 .l-container__table-title .charge-client{
 
   margin-left: 6.1rem;
+  display: flex;
+  gap: 0.5rem;
+
+}
+
+.l-container__table-title .charge-client img{
+
+  cursor: pointer;
 
 }
 
@@ -68,7 +76,6 @@
 
   width: 20rem;
 
-
 }
 .c-card .charge-description{
 
@@ -87,10 +94,10 @@
 
 }
 
-.c-card .charge-due-date{
+/* .c-card .charge-due-date{
 
 
-}
+} */
 
 .l-charges .section{
 

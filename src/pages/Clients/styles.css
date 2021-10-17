@@ -46,6 +46,14 @@
 .l-container__table-title .client{
 
   margin-left: 2.4rem;
+  display: flex;
+  gap: 0.5rem;
+
+}
+
+.l-container__table-title .client img{
+
+  cursor: pointer;
 
 }
 
