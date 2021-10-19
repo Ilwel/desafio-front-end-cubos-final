@@ -1,0 +1,66 @@
+.modal .l-container{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+}
+
+.modal .add-charges .c-card{
+
+  height: 85%;
+
+}
+
+.modal .add-charges .c-card__form{
+
+  width: 100%;
+  display: flex;
+  padding-left: 20%;
+  padding-right: 20%;
+  
+
+}
+
+.edit .l-container__form-buttons{
+
+  margin-top: 0.1rem;
+
+}
+
+.c-card__delete{
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.c-card__delete p{
+
+  cursor: pointer;
+
+}
+
+.c-card__delete p::after{
+  content: '';
+  display: block;
+  border-bottom: solid 0.1rem var(--main-color);
+  transform: scaleX(0);
+  transform-origin: 0% 50%;
+  transition: 1s;
+}
+
+.c-card__delete p:hover::after{
+
+  transform: scaleX(1);
+
+}
+
+.edit .c-card__close{
+
+  right: 36rem;
+  
+}
