@@ -16,6 +16,11 @@ import AddClients from "./pages/AddClients";
 import Clients from "./pages/Clients";
 import Charges from "./pages/Charges";
 import AddCharges from "./pages/AddCharges";
+import UpToDate from "./pages/UpToDate";
+import Defaulting from "./pages/Defaulting";
+import Pending from "./pages/Pending";
+import Overdue from "./pages/Overdue";
+import Paid from "./pages/Paid";
 
 
 function RedirectToHome(props) {
@@ -45,6 +50,11 @@ export default function Routes() {
         <ProtectedRoutes>
           <Route path="/" exact component={Home} />
           <Route path="/home" exact component={Home} />
+          <Route path="/home/report/up-to-date" exact component={UpToDate} />
+          <Route path="/home/report/defaulting" exact component={Defaulting} />
+          <Route path="/home/report/paid" exact component={Paid} />
+          <Route path="/home/report/pending" exact component={Pending} />
+          <Route path="/home/report/overdue" exact component={Overdue} />
           <Route path="/charges" exact component={Charges} />
           <Route path="/charges/add" exact component={AddCharges} />
           <Route path="/clients" exact component={Clients} />
