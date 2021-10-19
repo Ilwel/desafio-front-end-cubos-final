@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import makeUrl from '../../utils/makeUrl';
 import { toast } from 'react-toastify';
 import ModalLoading from '../ModalLoading';
+import { useHistory } from 'react-router';
 
 export default function ModalEditClient(props) {
   const { register, watch, handleSubmit, reset, setValue } = useForm();
@@ -17,6 +18,7 @@ export default function ModalEditClient(props) {
   const emailWatch = watch('email');
   const phoneWatch = watch('phone');
   const cpfWatch = watch('cpf');
+  const history = useHistory();
 
   function refreshUserForm() {
 
@@ -138,6 +140,7 @@ export default function ModalEditClient(props) {
       setOpen(false);
       localStorage.setItem('clientData', JSON.stringify(userDataApi));
       refreshUserForm();
+      history.go(0)
       return;
     }
     setOpen(false);
