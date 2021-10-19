@@ -47,6 +47,7 @@ const Input = React.forwardRef((props, ref) => {
             step={props.step}
             min={props.min}
             inputMode={props.inputMode}
+            value={props.value}
           />
         </div>
       )}
