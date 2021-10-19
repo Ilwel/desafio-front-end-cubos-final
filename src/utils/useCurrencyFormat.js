@@ -13,7 +13,12 @@ const useCurrencyMask = (register, options) => {
         alias: 'currency',
         numericInput: true,
         rightAlign: false,
-        positionCaretOnClick: "none"
+        positionCaretOnClick: "none",
+        autoGroup: true,
+        digitsOptional: false,
+        onBeforeMask: function (value, opts) {
+          return value;
+        },
 
       }).mask(ref.current)
 

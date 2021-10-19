@@ -5,7 +5,10 @@ function formatReal(int) {
     tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
   if (tmp.length < 4 && tmp.length > 1)
     tmp = '0' + tmp;
-
+  else if (tmp.length <= 1) {
+    tmp = tmp.replace(/([0-9]{1})$/g, ",0$1");
+    tmp = '0' + tmp;
+  }
   return tmp;
 }
 
