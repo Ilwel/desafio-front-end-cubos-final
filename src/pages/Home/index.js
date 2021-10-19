@@ -8,6 +8,7 @@ import ProfileIcon from '../../components/ProfileIcon';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import makeUrl from '../../utils/makeUrl';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   const [report, setReport] = useState('');
@@ -47,14 +48,18 @@ export default function Home() {
             Clientes
           </div>
           <div className="container">
-            <BorderedCard>
-              <h2 className="c-bordered-card__h2">Em dia</h2>
-              <h1 className="c-bordered-card__h1">{report.Em_dia}</h1>
-            </BorderedCard>
-            <BorderedCard className="danger">
-              <h2 className="c-bordered-card__h2">Inadimplentes</h2>
-              <h1 className="c-bordered-card__h1">{report.Inadimplentes}</h1>
-            </BorderedCard>
+            <Link id="up-to-date" to="/home/report/up-to-date" className="c-link">
+              <BorderedCard>
+                <h2 className="c-bordered-card__h2">Em dia</h2>
+                <h1 className="c-bordered-card__h1">{report.Em_dia}</h1>
+              </BorderedCard>
+            </Link>
+            <Link id="defaulting" to="/home/report/defaulting" className="c-link">
+              <BorderedCard className="danger">
+                <h2 className="c-bordered-card__h2">Inadimplentes</h2>
+                <h1 className="c-bordered-card__h1">{report.Inadimplentes}</h1>
+              </BorderedCard>
+            </Link>
           </div>
         </Card>
         <Card>
@@ -63,18 +68,24 @@ export default function Home() {
             Cobranças
           </div>
           <div className="container">
-            <BorderedCard className="secondary">
-              <h2 className="c-bordered-card__h2">Previstas</h2>
-              <h1 className="c-bordered-card__h1">{report.Previstas}</h1>
-            </BorderedCard>
-            <BorderedCard className="danger">
-              <h2 className="c-bordered-card__h2">Vencidas</h2>
-              <h1 className="c-bordered-card__h1">{report.Vencidas}</h1>
-            </BorderedCard>
-            <BorderedCard>
-              <h2 className="c-bordered-card__h2">Pagas</h2>
-              <h1 className="c-bordered-card__h1">{report.Pagas}</h1>
-            </BorderedCard>
+            <Link id="pending" to="/home/report/pending" className="c-link">
+              <BorderedCard className="secondary">
+                <h2 className="c-bordered-card__h2">Previstas</h2>
+                <h1 className="c-bordered-card__h1">{report.Previstas}</h1>
+              </BorderedCard>
+            </Link>
+            <Link id="overdue" to="/home/report/overdue" className="c-link">
+              <BorderedCard className="danger">
+                <h2 className="c-bordered-card__h2">Vencidas</h2>
+                <h1 className="c-bordered-card__h1">{report.Vencidas}</h1>
+              </BorderedCard>
+            </Link>
+            <Link id="paid" to="/home/report/paid" className="c-link">
+              <BorderedCard>
+                <h2 className="c-bordered-card__h2">Pagas</h2>
+                <h1 className="c-bordered-card__h1">{report.Pagas}</h1>
+              </BorderedCard>
+            </Link>
           </div>
         </Card>
       </div>

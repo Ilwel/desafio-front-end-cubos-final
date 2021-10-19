@@ -2,22 +2,25 @@ import ScrollBar from "../../components/ScrollBar"
 import ProfileIcon from "../../components/ProfileIcon"
 import SideBar from "../../components/SideBar"
 import "./styles.css"
-import orderByIcon from '../../assets/order_by.svg';
+import pointerIcon from '../../assets/pointer.svg'
 import Card from "../../components/Card"
 import { useState, useEffect } from "react";
 import makeUrl from "../../utils/makeUrl";
 import { formatReal, formatDate } from '../../utils/format';
-import ModalLoading from "../../components/ModalLoading"
-import SearchBar from "../../components/SearchBar";
+import ModalLoading from "../../components/ModalLoading";
 import { toast } from 'react-toastify';
 import ModalEditDeleteCharge from "../../components/ModalEditDeleteCharge";
+import ModalNavOne from "../../components/ModalNavOne";
+import ModalNavTwo from "../../components/ModalNavThree";
 
-export default function Charges(props) {
+export default function Pending(props) {
   const [charges, setCharges] = useState([]);
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [apiError, setApiError] = useState('');
   const [chargeId, setChargeId] = useState();
+  const [openModalOne, setOpenModalOne] = useState(false);
+  const [openModalTwo, setOpenModalTwo] = useState(false);
   const statusStyle = {
     'pago': 'up-to-date',
     'pendente': 'pending',
@@ -30,7 +33,7 @@ export default function Charges(props) {
 
       const token = localStorage.getItem('token');
       setOpen(true);
-      const res = await fetch(makeUrl('charge'), {
+      const res = await fetch(makeUrl('report/charges') + "?query=previstas", {
         method: 'GET',
         headers: {
           'Content-type': 'application/json',
@@ -62,52 +65,6 @@ export default function Charges(props) {
 
   }, [apiError]);
 
-  async function handleClickSearch(search) {
-
-    const token = localStorage.getItem('token');
-    console.log(search);
-    const res = await fetch(makeUrl('charge') + `?query=${search}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
-
-    const resData = await res.json();
-    console.log(resData);
-    if (res.ok) {
-
-      setCharges(resData);
-      return;
-
-    }
-    setCharges([]);
-    setApiError(resData);
-
-  }
-
-  async function handleOrderByClick() {
-
-    const token = localStorage.getItem('token');
-    const res = await fetch(makeUrl('charge') + `?name=.`, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
-
-    const resData = await res.json();
-    console.log(resData);
-    if (res.ok) {
-
-      setCharges(resData);
-      return;
-
-    }
-    setApiError(resData);
-
-  }
-
   function handleEditCharge(value) {
 
     const id = value.substring(1);
@@ -122,15 +79,20 @@ export default function Charges(props) {
       <SideBar />
       <ProfileIcon />
       <ModalLoading open={open} />
-      <SearchBar handle={handleClickSearch} />
       {openEdit && <ModalEditDeleteCharge id={chargeId} open={openEdit} setOpen={setOpenEdit} />}
+      {openModalOne && <ModalNavOne />}
+      {openModalTwo && <ModalNavTwo />}
       <div className="l-container charges">
+        <div className="c-nav">
+          <h1 onClick={() => setOpenModalOne(!openModalOne)} className="c-nav__first">Cobranças</h1>
+          <img src={pointerIcon} alt="" />
+          <h1 onClick={() => setOpenModalTwo(!openModalTwo)} className="c-nav__second">Previstas</h1>
+        </div>
         <div className="c-table">
           <div className="l-container__table-title">
             <span className="charge-id">ID</span>
             <span className="charge-client">
               Cliente
-              <img onClick={handleOrderByClick} src={orderByIcon} alt="" />
             </span>
             <span className="charge-description">Descrição</span>
             <span className="charge-value">Valor</span>

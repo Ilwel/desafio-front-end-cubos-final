@@ -1,0 +1,21 @@
+.c-nav{
+
+  margin-left: 10%;
+  margin-top: 5%;
+  display: flex;
+  gap: 2rem;
+
+}
+
+.c-nav h1{
+
+  cursor: pointer;
+  transition: 0.5s;
+
+}
+
+.c-nav h1:hover{
+
+  color: var(--color-4);
+
+}

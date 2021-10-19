@@ -69,6 +69,14 @@
   margin-left: 2.4rem;
   width: 9rem;
   font-weight: 600;
+  transition: 0.5s;
+
+}
+
+.c-card .charge-id:hover{
+
+  cursor: pointer;
+  color: var(--color-4);
 
 }
 

@@ -34,3 +34,10 @@
   gap: 1.6rem;
   
 }
+
+.c-link{
+
+  all: unset;
+  cursor: pointer;
+
+}

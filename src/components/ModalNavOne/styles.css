@@ -1,0 +1,33 @@
+@import url('../../styles/global.css');
+
+.modal__nav{
+
+  position: absolute;
+  top: 13%;
+  left: 25%;
+  background: #F8F8F8;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  height: 9.1rem;
+  width: 12.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 1rem;
+  animation: grow-up 0.5s;
+
+}
+
+.modal__nav .c-link{
+
+  font-size: 1.4rem;
+
+}
+
+.modal__nav .c-link:hover{
+
+  color: var(--color-4);
+
+}
