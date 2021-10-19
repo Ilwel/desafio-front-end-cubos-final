@@ -14,7 +14,6 @@ function formatReal(int) {
 
 function formatDate(str) {
   var data = new Date(str);
-  data.setDate(data.getDate() + 1);
 
   var dia = data.getDate().toString(),
     diaF = (dia.length === 1) ? '0' + dia : dia,
