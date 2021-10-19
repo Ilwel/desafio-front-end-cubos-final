@@ -39,7 +39,6 @@ export default function Charges(props) {
       })
 
       const resData = await res.json();
-      console.log(resData);
       if (res.ok) {
         localStorage.setItem('charges', JSON.stringify(resData));
         setCharges(resData);

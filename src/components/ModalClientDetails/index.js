@@ -37,7 +37,7 @@ export default function ModalClientDetails(props) {
           setCharges(resData.Charges);
 
         }
-        // console.log(resData);
+
 
       }
       load();

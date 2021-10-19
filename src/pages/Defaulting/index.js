@@ -48,7 +48,6 @@ export default function Defaulting() {
       })
 
       const resData = await res.json();
-      console.log(res);
       if (res.ok) {
         localStorage.setItem('clients', JSON.stringify(resData));
         setClients(resData);
@@ -65,7 +64,6 @@ export default function Defaulting() {
 
     const isItem = e.target.classList.contains('client__h1');
     if (!isItem) return;
-    console.log(e.target.id);
     setClientId(e.target.id);
     setOpenClient(true);
 

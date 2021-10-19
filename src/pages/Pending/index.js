@@ -42,7 +42,6 @@ export default function Pending(props) {
       })
 
       const resData = await res.json();
-      console.log(resData);
       if (res.ok) {
         localStorage.setItem('charges', JSON.stringify(resData));
         setCharges(resData);

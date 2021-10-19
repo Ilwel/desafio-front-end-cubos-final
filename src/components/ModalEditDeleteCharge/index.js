@@ -75,7 +75,6 @@ export default function ModalEditDeleteCharge(props) {
   }, [setValue, props.id, currency])
 
   useEffect(() => {
-    console.log(currency.current.value);
     setValue('value', currency.current.value);
     const watchs = {
 
@@ -119,13 +118,11 @@ export default function ModalEditDeleteCharge(props) {
     data.value = Number(data.value.replace(/[^0-9]/g, ""));
     const token = localStorage.getItem('token');
     data.client_id = clientWatch;
-    console.log(data);
     if (data.paid === 'true') {
       data.paid = true;
     } else {
       data.paid = false;
     }
-    console.log(data);
     setOpen(true)
     const res = await fetch(makeUrl('charge') + `/${props.id}`, {
       method: 'PUT',

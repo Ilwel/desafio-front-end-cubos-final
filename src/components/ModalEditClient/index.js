@@ -53,7 +53,6 @@ export default function ModalEditClient(props) {
         if (res.ok) {
           localStorage.setItem('clientData', JSON.stringify(resData.Client));
         }
-        console.log(resData);
 
         if (localStorage.getItem('clientData')) {
 
@@ -145,7 +144,6 @@ export default function ModalEditClient(props) {
     }
     setOpen(false);
     setApiError(resData);
-    console.log(resData);
 
   }
 

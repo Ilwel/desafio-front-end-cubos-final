@@ -41,8 +41,7 @@ export default function Overdue(props) {
         }
       })
 
-      const resData = await res.json();
-      console.log(resData);
+      const resData = await res.json();;
       if (res.ok) {
         localStorage.setItem('charges', JSON.stringify(resData));
         setCharges(resData);

@@ -47,7 +47,6 @@ export default function Clients() {
       })
 
       const resData = await res.json();
-      console.log(res);
       if (res.ok) {
         localStorage.setItem('clients', JSON.stringify(resData));
         setClients(resData);
@@ -70,7 +69,6 @@ export default function Clients() {
 
     const isItem = e.target.classList.contains('client__h1');
     if (!isItem) return;
-    console.log(e.target.id);
     setClientId(e.target.id);
     setOpenClient(true);
 
@@ -95,7 +93,6 @@ export default function Clients() {
   async function handleSearchClick(search) {
 
     const token = localStorage.getItem('token');
-    console.log(search);
     const res = await fetch(makeUrl('client') + `?query=${search}`, {
       method: 'GET',
       headers: {
@@ -104,7 +101,6 @@ export default function Clients() {
     })
 
     const resData = await res.json();
-    console.log(resData);
     if (res.ok) {
 
       setClients(resData);
@@ -127,7 +123,6 @@ export default function Clients() {
     })
 
     const resData = await res.json();
-    console.log(resData);
     if (res.ok) {
 
       setClients(resData);
